@@ -50,7 +50,7 @@ The project structure is as follows:
 - **src/app/app.module.ts**: The root module of the application, where all the components and services are imported.
 
 - **assets**: Stores any static assets such as images, fonts, etc.
-- 
+
 - **angular.json**: Angular configuration file.
 
 - **package.json**: Contains the project dependencies and scripts.
@@ -72,7 +72,7 @@ Example Response:
     "body": "Author Name Example"
   }
 ]
-
+```
 
 ## Notes for Me
 
@@ -113,7 +113,7 @@ Example Response:
 - **Why?** To ensure the data remains even after a page refresh.
 - **React Equivalent:** Same as using `localStorage.setItem` and `localStorage.getItem` in React.
 
-#### Conditional Rendering (showForm and showmsg):
+#### Conditional Rendering (showForm and showMsg):
 - **What?** Used variables to toggle the visibility of the form and display a success message.
 - **Why?** To provide feedback and simplify UI interactions.
 - **React Equivalent:** Similar to managing `showForm` or `showMsg` state and conditionally rendering JSX.
