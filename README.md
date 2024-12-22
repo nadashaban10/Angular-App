@@ -1,59 +1,74 @@
-# MyAngularTailwindApp
+# Book Library App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+## Project Description
 
-## Development server
+This is a simple Angular application that allows users to manage a list of books. The app fetches books from an API and provides the ability to add, delete, and search books.
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
-```
+1. **Fetch and Display Books**: Fetches a list of books from a provided API endpoint and displays them.
+2. **Add a New Book**: Provides a form to add a new book with fields for title, author, genre, and published year.
+3. **Delete a Book**: Allows users to delete a book from the list.
+4. **Search Functionality**: Includes a search bar to filter the book list by title or author.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Installation
 
-## Code scaffolding
+Follow these steps to run the project locally:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Clone the repository:
+    ```bash
+    git clone <repository-url>
+    ```
 
-```bash
-ng generate component component-name
-```
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+3. Start the development server:
+    ```bash
+    ng serve
+    ```
 
-```bash
-ng generate --help
-```
+4. Open the application in your browser:
+    ```bash
+    http://localhost:4200
+    ```
 
-## Building
+## File Structure
 
-To build the project run:
+The project structure is as follows:
 
-```bash
-ng build
-```
+- **src/app/components**: Contains the components for the app.
+  - **book-list**: Displays the list of books and provides a delete button for each book.
+  - **book-form**: A form for adding new books.
+  - **search-bar**: A component for searching books by title or author.
+  
+- **src/app/services**:
+  - **book.service.ts**: Service for fetching books from the API and managing book data.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **src/app/app.module.ts**: The root module of the application, where all the components and services are imported.
 
-## Running unit tests
+- **assets**: Stores any static assets such as images, fonts, etc.
+- 
+- **angular.json**: Angular configuration file.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **package.json**: Contains the project dependencies and scripts.
 
-```bash
-ng test
-```
+- **README.md**: This file with project details.
 
-## Running end-to-end tests
+## API Endpoints
 
-For end-to-end (e2e) testing, run:
+### 1. Fetch All Books
+- **GET** `https://jsonplaceholder.typicode.com/posts`
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Example Response:
+```json
+[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "Book Title Example",
+    "body": "Author Name Example"
+  }
+]

@@ -11,8 +11,9 @@ import { FormsModule } from '@angular/forms';
 export class BooksComponent implements OnInit {
   books: any[] = []; // Array to store books
   newBook: any = { title: '', body: '', genre: '', year: '' };
+  searchQuery: string = ''; // Variable to hold search input
   showForm = false; // Object to store form data
-  showmsg=  false;
+  showmsg = false;
 
   constructor(private booksService: BooksService) { }
 
@@ -22,6 +23,18 @@ export class BooksComponent implements OnInit {
       const localBooks = this.getLocalBooks(); // Get books from local storage
       this.books = [...apiBooks, ...localBooks]; // Merge API books with local books
     });
+  }
+
+  get filteredBooks(): any[] {
+    // Dynamically filter books based on the search query
+    if (!this.searchQuery) return this.books;
+
+    const lowerCaseQuery = this.searchQuery.toLowerCase();
+    return this.books.filter(
+      book =>
+        book.title.toLowerCase().includes(lowerCaseQuery) ||
+        (book.body && book.body.toLowerCase().includes(lowerCaseQuery))
+    );
   }
 
   addBook(): void {
