@@ -12,6 +12,7 @@ export class BooksComponent implements OnInit {
   books: any[] = []; // Array to store books
   newBook: any = { title: '', body: '', genre: '', year: '' };
   showForm = false; // Object to store form data
+  showmsg=  false;
 
   constructor(private booksService: BooksService) { }
 
@@ -41,6 +42,11 @@ export class BooksComponent implements OnInit {
     // Reset the form fields
     this.newBook = { title: '', body: '', genre: '', year: '' };
     this.showForm = false;
+    this.showmsg = true;
+
+    setTimeout(() => {
+      this.showmsg = false;
+    }, 3000);
   }
 
   deleteBook(index: number): void {
