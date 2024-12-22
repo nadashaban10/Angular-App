@@ -3,13 +3,8 @@ import { BooksService } from '../books.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
-
-
-
 @Component({
   selector: 'app-books',
-  
   templateUrl: './books.component.html',
   imports: [CommonModule, FormsModule]
 })
@@ -17,7 +12,6 @@ export class BooksComponent implements OnInit {
   books: any[] = []; // Array to store books
   newBook: any = { title: '', body: '', genre: '', year: '' };
   showForm = false; // Object to store form data
-
 
   constructor(private booksService: BooksService) { }
 
@@ -30,6 +24,16 @@ export class BooksComponent implements OnInit {
   }
 
   addBook(): void {
+    // Check if all fields are filled
+    if (
+      !this.newBook.title ||
+      !this.newBook.body ||
+      !this.newBook.year
+    ) {
+      alert('All fields are required. Please fill out the form completely.');
+      return; // Stop the method execution if validation fails
+    }
+
     const bookToAdd = { ...this.newBook };
     this.books.push(bookToAdd); // Add the new book to the local array
     this.saveToLocalBooks(bookToAdd); // Save the new book to local storage
@@ -51,7 +55,6 @@ export class BooksComponent implements OnInit {
       book => book.title !== bookToDelete.title || book.body !== bookToDelete.body
     );
     localStorage.setItem('localBooks', JSON.stringify(updatedLocalBooks));
-
   }
 
   private getLocalBooks(): any[] {
@@ -65,6 +68,5 @@ export class BooksComponent implements OnInit {
     const localBooks = this.getLocalBooks();
     localBooks.push(book);
     localStorage.setItem('localBooks', JSON.stringify(localBooks));
-
   }
 }
