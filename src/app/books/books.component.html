@@ -10,6 +10,8 @@
       type="text" 
       placeholder="Search Book . . ." 
       class="p-2 rounded-lg border w-full text-left border-gray-300"
+      [(ngModel)]="searchQuery"
+      (input)="filterBooks()"
     />
     <!-- Search Icon -->
     <span class="absolute inset-y-0 right-2 flex items-center">
@@ -28,7 +30,22 @@
         />
       </svg>
     </span>
+  
+    <!-- Search Results -->
+    <ul 
+      *ngIf="filteredBooks.length > 0 && searchQuery" 
+      class="absolute top-full left-0 mt-2 w-full bg-gray-50 border rounded-lg shadow-lg z-10"
+    >
+      <li 
+        *ngFor="let book of filteredBooks" 
+        class="p-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+      >
+        <strong>{{ book.title }}</strong> 
+      </li>
+    </ul>
   </div>
+  
+  
   
   <button 
     (click)="showForm = true"
@@ -37,7 +54,6 @@
     Add new Book
   </button>
 </div>
-
 
   <!-- Popup Form -->
   <div 

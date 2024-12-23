@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BooksService } from '../books.service'; 
+import { BooksService } from '../books.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -9,45 +9,36 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule]
 })
 export class BooksComponent implements OnInit {
-  books: any[] = []; 
+  books: any[] = [];
   newBook: any = { title: '', body: '', genre: '', year: '' };
-  searchQuery: string = ''; 
-  showForm = false; 
+  filteredBooks: any[] = [];
+  searchQuery: string = '';
+  showForm = false;
   showmsg = false;
+
   constructor(private booksService: BooksService) { }
-  
+
   ngOnInit(): void {
     this.booksService.getBooks().subscribe(apiBooks => {
       const localBooks = this.getLocalBooks();
       this.books = [...apiBooks, ...localBooks];
+      this.filteredBooks = this.books; 
     });
   }
 
-  get filteredBooks(): any[] {
-    if (!this.searchQuery) return this.books;
-
-    const lowerCaseQuery = this.searchQuery.toLowerCase();
-    return this.books.filter(
-      book =>
-        book.title.toLowerCase().includes(lowerCaseQuery) ||
-        (book.body && book.body.toLowerCase().includes(lowerCaseQuery))
-    );
-  }
-
   addBook(): void {
-
     if (
       !this.newBook.title ||
       !this.newBook.body ||
       !this.newBook.year
     ) {
       alert('All fields are required. Please fill out the form completely.');
-      return; 
+      return;
     }
 
     const bookToAdd = { ...this.newBook };
-    this.books.push(bookToAdd); 
-    this.saveToLocalBooks(bookToAdd); 
+    this.books.push(bookToAdd);
+    this.saveToLocalBooks(bookToAdd);
     this.newBook = { title: '', body: '', genre: '', year: '' };
     this.showForm = false;
     this.showmsg = true;
@@ -65,6 +56,13 @@ export class BooksComponent implements OnInit {
       book => book.title !== bookToDelete.title || book.body !== bookToDelete.body
     );
     localStorage.setItem('localBooks', JSON.stringify(updatedLocalBooks));
+  }
+
+  filterBooks(): void {
+        this.filteredBooks = this.books.filter(book =>
+        book.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        book.body.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
   }
 
   private getLocalBooks(): any[] {
