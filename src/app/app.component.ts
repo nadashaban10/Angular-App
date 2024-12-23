@@ -9,5 +9,5 @@ import { BooksComponent } from './books/books.component';
 
 })
 export class AppComponent {
-  title = 'my-angular-tailwind-app';
+  title = 'Book library';
 }

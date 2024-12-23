@@ -16,8 +16,6 @@ import { BooksComponent } from './books/books.component'; // Import BooksCompone
     HttpClientModule, 
     CommonModule,
     FormsModule
-    
-
   ],
   providers: [],
   bootstrap: [AppComponent]

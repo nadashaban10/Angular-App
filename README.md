@@ -74,52 +74,88 @@ Example Response:
 ]
 ```
 
-## Notes for Me
+# Angular Basics (Notes For Me)
 
-### Functionalities Implemented:
+## Lifecycle Hooks: `ngOnInit`
+### What it is:
+`ngOnInit` is a lifecycle hook in Angular. It's part of the Angular Component lifecycle, similar to `componentDidMount` in React.
 
-#### Fetching Data with HttpClient:
-- **What?** Used Angular's HttpClient to fetch data from the API.
-- **Why?** To load the initial list of books from an external source.
-- **React Equivalent:** Similar to using `fetch()` or `axios` in a `useEffect` hook.
+### When it runs:
+It's called once the component has been initialized and the bindings (inputs/outputs) are ready.
 
-#### Component Lifecycle (ngOnInit):
-- **What?** Implemented the `ngOnInit` lifecycle hook to fetch books when the component initializes.
-- **Why?** To ensure the data is loaded before the component is rendered.
-- **React Equivalent:** Similar to using `useEffect(() => {}, [])` for initial API calls.
+### Use case:
+Use it to initialize data, fetch data from APIs, or set up any logic when the component is loaded.
 
-#### Two-Way Data Binding:
-- **What?** Used Angular's `[(ngModel)]` to bind form inputs to the `newBook` object.
-- **Why?** To simplify managing form data.
-- **React Equivalent:** Similar to managing state for form fields with `useState` and `onChange` handlers.
+---
 
-#### Filtering Books (Getter Function):
-- **What?** Created a `filteredBooks` getter to dynamically filter books based on the search query.
-- **Why?** To provide a real-time search experience.
-- **React Equivalent:** Similar to deriving filtered data in the render method or using a computed state in a functional component.
+## Modules
+### What they are:
+Modules in Angular are a way to group components, services, directives, and pipes logically. Think of them like `index.js` where you organize imports and exports.
 
-#### Adding a Book:
-- **What?** Created a method to validate and add books locally. It also saves the new book to `localStorage`.
-- **Why?** To allow users to add their own books without a backend.
-- **React Equivalent:** Similar to updating the state with a new item and persisting it to `localStorage`.
+### Why they're used:
+They help manage the application’s structure and lazy loading. The root module is `AppModule`.
 
-#### Deleting a Book:
-- **What?** Implemented a method to remove a book from the list and update `localStorage`.
-- **Why?** To let users manage their book list.
-- **React Equivalent:** Similar to filtering out an item from an array in state and saving the updated array to `localStorage`.
+---
 
-#### Local Storage Management:
-- **What?** Used `localStorage` to persist user-added books.
-- **Why?** To ensure the data remains even after a page refresh.
-- **React Equivalent:** Same as using `localStorage.setItem` and `localStorage.getItem` in React.
+## Observables
+### What they are:
+Observables are part of **RxJS**, which Angular uses for handling asynchronous data streams (like fetching data from APIs). They’re similar to Promises in JavaScript but more powerful, as they allow multiple values over time.
 
-#### Conditional Rendering (showForm and showMsg):
-- **What?** Used variables to toggle the visibility of the form and display a success message.
-- **Why?** To provide feedback and simplify UI interactions.
-- **React Equivalent:** Similar to managing `showForm` or `showMsg` state and conditionally rendering JSX.
+### How to use:
+Subscribe to an observable to listen for emitted values.
 
-### Why Angular Features Over React?
-- **Service Layer (BooksService):** Angular's dependency injection makes managing API services easy and modular.
-- **Template Syntax:** Angular's built-in directives (e.g., `*ngIf`, `*ngFor`) simplify conditional rendering and iteration.
-- **Two-Way Binding:** Angular's `[(ngModel)]` reduces boilerplate for form handling compared to manually managing `onChange` in React.
+---
+
+## Directives
+### What they are:
+Directives are Angular features that let you modify the DOM. Think of them like attributes in HTML or JSX in React.
+
+- **Structural directives:** Modify the structure of the DOM (e.g., `*ngIf`, `*ngFor`).
+- **Attribute directives:** Modify the appearance/behavior of elements (e.g., `ngClass`, `ngStyle`).
+
+---
+
+## Access Modifiers: `private` in Functions or Methods
+### What it is:
+Angular uses **TypeScript**, which allows specifying access modifiers (`private`, `public`, `protected`) for properties and methods.
+
+- **`private`:** The property/method can only be accessed within the class.
+- **`public`:** The property/method is accessible anywhere (default).
+- **`protected`:** The property/method is accessible within the class and its subclasses.
+
+---
+
+## Two-Way Data Binding
+### What it is:
+Two-way data binding allows automatic synchronization of data between the component (TypeScript) and the view (HTML). Think of it as the combination of `useState` in React with controlled inputs.
+
+### How it works:
+Use `[(ngModel)]` for two-way binding. It requires importing the `FormsModule`.
+
+---
+
+## RxJS
+### What it is:
+RxJS (Reactive Extensions for JavaScript) is a library for reactive programming using Observables. It provides tools for working with asynchronous data streams, such as events, HTTP requests, and more.
+
+### Key Concepts:
+1. **Observable:** Represents a stream of data that can emit multiple values over time.
+2. **Observer:** A consumer of the data emitted by an Observable.
+3. **Operators:** Functions used to transform, filter, or combine data streams (e.g., `map`, `filter`, `merge`).
+4. **Subscription:** A mechanism to start listening to an Observable.
+
+### Example:
+```typescript
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+const observable = of(1, 2, 3).pipe(map(x => x * 2));
+
+observable.subscribe(value => console.log(value)); // Output: 2, 4, 6
+```
+
+### Use case in Angular:
+RxJS is heavily used in Angular for handling asynchronous operations like HTTP requests and event handling.
+
+---
 
