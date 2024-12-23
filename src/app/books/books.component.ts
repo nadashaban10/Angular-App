@@ -9,24 +9,21 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule]
 })
 export class BooksComponent implements OnInit {
-  books: any[] = []; // Array to store books
+  books: any[] = []; 
   newBook: any = { title: '', body: '', genre: '', year: '' };
-  searchQuery: string = ''; // Variable to hold search input
-  showForm = false; // Object to store form data
+  searchQuery: string = ''; 
+  showForm = false; 
   showmsg = false;
-
   constructor(private booksService: BooksService) { }
-
+  
   ngOnInit(): void {
-    // Fetch books from API and local storage on component initialization
     this.booksService.getBooks().subscribe(apiBooks => {
-      const localBooks = this.getLocalBooks(); // Get books from local storage
-      this.books = [...apiBooks, ...localBooks]; // Merge API books with local books
+      const localBooks = this.getLocalBooks();
+      this.books = [...apiBooks, ...localBooks];
     });
   }
 
   get filteredBooks(): any[] {
-    // Dynamically filter books based on the search query
     if (!this.searchQuery) return this.books;
 
     const lowerCaseQuery = this.searchQuery.toLowerCase();
@@ -38,21 +35,19 @@ export class BooksComponent implements OnInit {
   }
 
   addBook(): void {
-    // Check if all fields are filled
+
     if (
       !this.newBook.title ||
       !this.newBook.body ||
       !this.newBook.year
     ) {
       alert('All fields are required. Please fill out the form completely.');
-      return; // Stop the method execution if validation fails
+      return; 
     }
 
     const bookToAdd = { ...this.newBook };
-    this.books.push(bookToAdd); // Add the new book to the local array
-    this.saveToLocalBooks(bookToAdd); // Save the new book to local storage
-
-    // Reset the form fields
+    this.books.push(bookToAdd); 
+    this.saveToLocalBooks(bookToAdd); 
     this.newBook = { title: '', body: '', genre: '', year: '' };
     this.showForm = false;
     this.showmsg = true;
@@ -64,11 +59,7 @@ export class BooksComponent implements OnInit {
 
   deleteBook(index: number): void {
     const bookToDelete = this.books[index];
-
-    // Remove book from the books array
     this.books.splice(index, 1);
-
-    // Check if the book is locally added and update local storage
     const localBooks = this.getLocalBooks();
     const updatedLocalBooks = localBooks.filter(
       book => book.title !== bookToDelete.title || book.body !== bookToDelete.body
@@ -77,13 +68,11 @@ export class BooksComponent implements OnInit {
   }
 
   private getLocalBooks(): any[] {
-    // Retrieve books from local storage
     const localBooks = localStorage.getItem('localBooks');
     return localBooks ? JSON.parse(localBooks) : [];
   }
 
   private saveToLocalBooks(book: any): void {
-    // Save the new book to local storage
     const localBooks = this.getLocalBooks();
     localBooks.push(book);
     localStorage.setItem('localBooks', JSON.stringify(localBooks));
