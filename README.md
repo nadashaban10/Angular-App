@@ -144,18 +144,5 @@ RxJS (Reactive Extensions for JavaScript) is a library for reactive programming 
 3. **Operators:** Functions used to transform, filter, or combine data streams (e.g., `map`, `filter`, `merge`).
 4. **Subscription:** A mechanism to start listening to an Observable.
 
-### Example:
-```typescript
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
 
-const observable = of(1, 2, 3).pipe(map(x => x * 2));
-
-observable.subscribe(value => console.log(value)); // Output: 2, 4, 6
-```
-
-### Use case in Angular:
-RxJS is heavily used in Angular for handling asynchronous operations like HTTP requests and event handling.
-
----
 
