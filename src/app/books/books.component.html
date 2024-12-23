@@ -2,7 +2,6 @@
   <div class="text-center bg-red-500 text-white font-semibold text-2xl p-4 rounded-lg">
     Welcome to My Book Library!
   </div>
-
   <div class="flex justify-between my-4 sm:mx-[100px] mx-2 sm:flex-row flex-col items-center">
   <!-- Search Input Group -->
   <div class="relative w-[270px]">
@@ -14,7 +13,7 @@
       (input)="filterBooks()"
     />
     <!-- Search Icon -->
-    <span class="absolute inset-y-0 right-2 flex items-center">
+    <span class="absolute inset-y-0 right-2 flex items-center ">
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
         fill="none" 
@@ -32,8 +31,12 @@
     </span>
   
     <!-- Search Results -->
+     <div>
+     <p  *ngIf ="filteredBooks.length === 0 && searchQuery"
+     class="text-red-500">No Books founded!</p>
+    </div>
     <ul 
-      *ngIf="filteredBooks.length > 0 && searchQuery" 
+      *ngIf="filteredBooks.length > 0 && searchQuery " 
       class="absolute top-full left-0 mt-2 w-full bg-gray-50 border rounded-lg shadow-lg z-10"
     >
       <li 
@@ -44,9 +47,7 @@
       </li>
     </ul>
   </div>
-  
-  
-  
+
   <button 
     (click)="showForm = true"
     class="flex justify-center items-center w-[150px] h-[50px] bg-red-500 sm:mt-0 mt-4 rounded-lg text-white font-semibold"
@@ -158,7 +159,35 @@
   </svg>
   You added a new book!
 </div>
-
+<!--Your recent books-->
+<h2 class="text-2xl font-semibold text-gray-700 text-center">Your Recent Books</h2>
+<span *ngIf="localBooks.length === 0" class=" text-red-700 font-semibold text-xl mt-5 ml-5">
+  You have not added any books yet!  </span>
+ <div class="cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4  mx-5 my-2 sm:mx-[100px] ">
+  <div *ngFor="let book of localBooks; let i = index" class="card bg-white shadow-md rounded-lg p-4 flex flex-col">
+    <div class="card-content flex flex-col flex-grow items-center justify-center">
+      <img src="assets/books.jpg" class="w-32 h-32 rounded-lg" />
+      <h2 class="text-xl font-bold text-center mt-2">
+        <span class="text-red-500 text-xl font-bold text-center">Title:</span> {{ book.title }}
+      </h2>
+      <p class="text-gray-700  text-center">
+        <span class="text-red-500 text-xl font-bold  text-center">Overview:</span> {{ book.body }}
+      </p>
+      <p *ngIf="book.genre" class="text-gray-700  text-center ">
+        <span class="text-red-500 text-xl font-bold  text-center">Genre:</span> {{ book.genre }}
+      </p>
+      <p *ngIf="book.year" class="text-gray-700  text-center">
+        <span class="text-red-500 text-xl font-bold  text-center">Published Year:</span> {{ book.year }}
+      </p>
+    </div>
+    <button 
+      (click)="deleteBook(i)" 
+      class="w-full p-2 bg-black text-white rounded-lg mt-2 self-end">
+      Delete Book
+    </button>
+  </div>
+</div>
+<hr class="my-5 text-gray-500 mx-5" />
   <!-- Book Cards -->
   <div class="cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4  mx-5 my-2 sm:mx-[100px] ">
     <div *ngFor="let book of books; let i = index" class="card bg-white shadow-md rounded-lg p-4 flex flex-col">
