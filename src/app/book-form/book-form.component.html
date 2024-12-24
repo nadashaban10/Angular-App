@@ -1,0 +1,82 @@
+<div class="fixed inset-0 flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+    <form #bookForm="ngForm" (ngSubmit)="submitForm()" class="space-y-4">
+      <div>
+        <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
+        <input 
+          [(ngModel)]="book.title" 
+          name="title" 
+          id="title" 
+          placeholder="Enter book title" 
+          required 
+          class="w-full p-2 rounded-lg border border-gray-300"
+          #title="ngModel"
+        />
+        <div *ngIf="title.invalid && title.touched" class="text-red-500 text-sm">Title is required</div>
+      </div>
+
+      <div>
+        <label for="author" class="block text-gray-700 font-bold mb-2">Author</label>
+        <input 
+          [(ngModel)]="book.body" 
+          name="author" 
+          id="author" 
+          placeholder="Enter author name" 
+          required 
+          class="w-full p-2 rounded-lg border border-gray-300"
+          #author="ngModel"
+        />
+        <div *ngIf="author.invalid && author.touched" class="text-red-500 text-sm">Author is required</div>
+      </div>
+
+      <div>
+        <label for="genre" class="block text-gray-700 font-bold mb-2">Genre</label>
+        <select 
+          [(ngModel)]="book.genre" 
+          name="genre" 
+          id="genre" 
+          required 
+          class="w-full p-2 rounded-lg border border-gray-300"
+          #genre="ngModel"
+        >
+          <option value="" disabled>Select Genre</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          <option value="Mystery">Mystery</option>
+        </select>
+        <div *ngIf="genre.invalid && genre.touched" class="text-red-500 text-sm">Genre is required</div>
+      </div>
+
+      <div>
+        <label for="year" class="block text-gray-700 font-bold mb-2">Published Year</label>
+        <input 
+          [(ngModel)]="book.year" 
+          name="year" 
+          id="year" 
+          type="date" 
+          required 
+          class="w-full p-2 rounded-lg border border-gray-300"
+          #year="ngModel"
+        />
+        <div *ngIf="year.invalid && year.touched" class="text-red-500 text-sm">Year is required</div>
+      </div>
+
+      <div class="flex flex-row justify-between">
+        <button 
+          type="submit" 
+        
+          class="bg-red-500 text-white rounded-lg font-semibold h-[40px] w-[70%]"
+        >
+          Add
+        </button>
+        <button 
+          type="button" 
+          (click)="cancel.emit()" 
+          class="bg-black text-white rounded-lg font-semibold h-[40px] w-[28%]"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

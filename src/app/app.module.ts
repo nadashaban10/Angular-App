@@ -5,11 +5,19 @@ import { HttpClientModule } from '@angular/common/http'; // Import HttpClientMod
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { AppComponent } from './app.component';
 import { BooksComponent } from './books/books.component'; // Import BooksComponent
+import { BookFormComponent } from './book-form/book-form.component';
+import { SearchComponent } from './search/search.component';
+import { BookListComponent } from './book-list/book-list.component';
 
 @NgModule({
   declarations: [
+
     AppComponent,
-    BooksComponent
+    BooksComponent,
+    BookFormComponent,
+    SearchComponent,
+    BookListComponent,
+    
   ],
   imports: [
     BrowserModule,

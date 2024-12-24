@@ -2,65 +2,83 @@ import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../books.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { SearchComponent } from '../search/search.component';
+import { BookListComponent } from '../book-list/book-list.component';
+import { BookFormComponent } from '../book-form/book-form.component';
+import{HeaderComponent} from '../header/header.component';
 
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule,SearchComponent, BookListComponent, BookFormComponent, HeaderComponent],
 })
 export class BooksComponent implements OnInit {
-  books: any[] = []; // Combined list of API and local books
-  localBooks: any[] = []; // Local books only (for only recent books)
-  newBook: any = { title: '', body: '', genre: '', year: '' };
+  books: any[] = [];
   filteredBooks: any[] = [];
-  searchQuery: string = '';
   showForm = false;
-  showmsg = false;
-
+  showMsg = false;
+  
+  searchQuery: string = '';
   constructor(private booksService: BooksService) { }
 
   ngOnInit(): void {
-    this.booksService.getBooks().subscribe(apiBooks => {
-      // Get local books from localStorage and combine them with API books
-      this.localBooks = this.getLocalBooks(); // Local books only
-      this.books = [...apiBooks, ...this.localBooks].slice(0, 5); 
-      this.filteredBooks = this.books; 
+    this.booksService.getBooks().subscribe((apiBooks) => {
+      const localBooks = this.getLocalBooks();
+      this.books = [...apiBooks.slice(0, 3), ...localBooks];
+      this.filteredBooks = this.books;
     });
   }
 
-  addBook(): void {
-    if (!this.newBook.title || !this.newBook.body || !this.newBook.year) {
-      alert('All fields are required. Please fill out the form completely.');
+ 
+  filterBooks(query: string): void {
+    this.searchQuery = query.trim(); // Update the search query in BooksComponent
+  
+    if (this.searchQuery === '') {
+      // Show all books when the query is empty
+      this.filteredBooks = this.books;
+    } else {
+      // Filter books based on title or body
+      this.filteredBooks = this.books.filter((book) =>
+        (book.title?.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+         book.body?.toLowerCase().includes(this.searchQuery.toLowerCase()))
+      );
+    }
+  }
+  
+  
+
+  addBook(book: any): void {
+    if (!book.title || !book.body || !book.year) {
       return;
     }
-
-    const bookToAdd = { ...this.newBook };
-    this.books.push(bookToAdd); // Add to combined list (API + Local)
-    this.localBooks.push(bookToAdd); // Add to local books only
-    this.saveToLocalBooks(bookToAdd); // Save to localStorage
-    this.newBook = { title: '', body: '', genre: '', year: '' };
-    this.showForm = false;
-    this.showmsg = true;
-
+    this.books.push(book);
+    this.filteredBooks = [...this.books];
+    this.saveToLocalBooks(book);
+    this.showForm = false; // Hide the form after submission
+    this.showMsg = true; // Show the success message
     setTimeout(() => {
-      this.showmsg = false;
-    }, 3000);
+      this.showMsg = false; // Hide the success message after 2 seconds
+    }, 5000);
+    
   }
+  
 
-  deleteBook(index: number): void {
-    const bookToDelete = this.books[index];
-    this.books.splice(index, 1);
-    this.localBooks.splice(index, 1);
-    this.localBooks = this.localBooks.filter(book => book.title !== bookToDelete.title || book.body !== bookToDelete.body); // Remove only from local books
-    this.saveToLocalBooks(null); 
-  }
+  deleteBook(book: any): void {
+  // Remove the book from the books array
+  this.books = this.books.filter((b) => b !== book);
+  this.filteredBooks = [...this.books];
 
-  filterBooks(): void {
-    this.filteredBooks = this.books.filter(book =>
-      book.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      book.body.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+  // Update the localBooks array in localStorage
+  const localBooks = this.getLocalBooks().filter(
+    (b: any) =>
+      b.title !== book.title || b.body !== book.body // Compare by unique attributes
+  );
+  localStorage.setItem('localBooks', JSON.stringify(localBooks));
+}
+
+
+  toggleForm(): void {
+    this.showForm = !this.showForm;
   }
 
   private getLocalBooks(): any[] {
@@ -69,13 +87,9 @@ export class BooksComponent implements OnInit {
   }
 
   private saveToLocalBooks(book: any): void {
-    if (book) {
-      const localBooks = this.getLocalBooks();
-      localBooks.push(book);
-      localStorage.setItem('localBooks', JSON.stringify(localBooks));
-    } else {
-      localStorage.setItem('localBooks', JSON.stringify(this.localBooks)); // Update local storage after deletion
-    }
+    const localBooks = this.getLocalBooks();
+    if (book) localBooks.push(book);
+    localStorage.setItem('localBooks', JSON.stringify(localBooks));
   }
 }
 
