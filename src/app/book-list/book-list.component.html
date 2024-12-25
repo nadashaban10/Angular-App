@@ -1,18 +1,18 @@
-<div class="cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 mx-5 my-2 sm:mx-[100px] mt-[90px] ">
+<div class="cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 mx-5 my-2 sm:mx-[100px] mt-[90px]  "> 
   <div *ngIf="books.length === 0" class="text-center text-red-700 text-xl font-semibold text-center">
     No Books Found
   </div>
     <div 
       *ngFor="let book of books" 
-      class="card bg-white shadow-md rounded-lg p-4 flex flex-col"
+      class="card bg-white shadow-md rounded-lg p-4 flex flex-col bg-gray-50 hover:shadow-lg hover:transition hover:duration-300 hover:scale-105"
     >
-      <div class="card-content flex flex-col flex-grow items-center justify-center">
+      <div class="card-content flex flex-col flex-grow items-center justify-center ">
         <img src="assets/books.jpg" class="w-32 h-32 rounded-lg" alt="Book cover" />
         <h2 class="text-xl font-bold text-center mt-2">
           <span class="text-red-500 text-xl font-bold text-center">Title:</span> {{ book.title }}
         </h2>
         <p class="text-gray-700 text-center">
-          <span class="text-red-500 text-xl font-bold text-center">Author:</span> {{ book.body }}
+          <span class="text-red-500 text-xl font-bold text-center">overview:</span> {{ book.body }}
         </p>
         <p *ngIf="book.genre" class="text-gray-700 text-center">
           <span class="text-red-500 text-xl font-bold text-center">Genre:</span> {{ book.genre }}

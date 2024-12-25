@@ -1,1 +1,31 @@
-<app-books></app-books>
+<app-header></app-header>
+<app-search (search)="filterBooks($event)"></app-search>
+<button 
+(click)="toggleForm()"
+class="flex justify-center items-center w-[150px] h-[50px] bg-red-500  rounded-lg text-white font-semibold top-[120px] right-[110px] sm:top-[60px] sm:right-5 absolute m-5 mb-5 hover:bg-red-600"
+>
+Add new Book
+</button>
+<div 
+*ngIf="showMsg"
+
+class="flex items-center justify-center bg-white text-green-500 font-semibold p-4 rounded-lg shadow-md fixed top-[150px] right-5 z-50"
+>
+<svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  fill="none" 
+  viewBox="0 0 24 24" 
+  stroke-width="2" 
+  stroke="currentColor" 
+  class="w-6 h-6 mr-2"
+>
+  <path 
+    stroke-linecap="round" 
+    stroke-linejoin="round" 
+    d="M5 13l4 4L19 7"
+  />
+</svg>
+You added a new book!
+</div>
+<app-book-list [books]="filteredBooks"  (delete)="deleteBook($event)"> </app-book-list>
+<app-book-form *ngIf="showForm" (submit)="addBook($event)" (cancel)="toggleForm()"></app-book-form>
