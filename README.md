@@ -39,7 +39,7 @@ Follow these steps to run the project locally:
 
 The project structure is as follows:
 
-- **src/app/components**: Contains the components for the app.
+- **src/app/**: Contains the components for the app.
 - **app**: The parent component cotain the whole components
   - **book-list**: Displays the list of books and provides a delete button for each book.
   - **book-form**: A form for adding new books.
