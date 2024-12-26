@@ -1,11 +1,13 @@
 <app-header></app-header>
+<div class="flex justify-between items-center p-4 flex-col sm:flex-row ">
 <app-search (search)="filterBooks($event)"></app-search>
 <button 
 (click)="toggleForm()"
-class="flex justify-center items-center w-[150px] h-[50px] bg-red-500  rounded-lg text-white font-semibold top-[140px] right-[10px] sm:top-[60px] sm:right-5 absolute m-5 mb-5 hover:bg-red-600"
+class="flex justify-center items-center w-[150px] h-[50px] bg-red-500  rounded-lg text-white font-semibold mt-3 sm:mt-0 sm:mr-5   hover:bg-red-600"
 >
 Add new Book
 </button>
+</div>
 <div 
 *ngIf="showMsg"
 
