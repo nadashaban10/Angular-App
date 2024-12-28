@@ -146,5 +146,5 @@ RxJS (Reactive Extensions for JavaScript) is a library for reactive programming 
 4. **Subscription:** A mechanism to start listening to an Observable.
 
 
-###Resources 
+### Resources 
 (https://www.tektutorialshub.com/angular-tutorial/#google_vignette)
