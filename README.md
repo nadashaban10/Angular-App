@@ -29,7 +29,6 @@ Follow these steps to run the project locally:
     ```bash
     ng serve
     ```
-
 4. Open the application in your browser:
     ```bash
     http://localhost:4200
@@ -147,4 +146,5 @@ RxJS (Reactive Extensions for JavaScript) is a library for reactive programming 
 4. **Subscription:** A mechanism to start listening to an Observable.
 
 
-
+###Resources 
+(https://www.tektutorialshub.com/angular-tutorial/#google_vignette)
