@@ -29,6 +29,10 @@ Follow these steps to run the project locally:
     ```bash
     ng serve
     ```
+4. Open the application in your browser:
+    ```bash
+    http://localhost:4200
+    ```
 
 ## File Structure
 
