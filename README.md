@@ -151,11 +151,11 @@ RxJS (Reactive Extensions for JavaScript) is a library for reactive programming 
 
 
 
-### Addtional Notes
+# Addtional Notes
 --------------------
 
 
-##  A getter is a method that retrieves and returns the value of a property but is accessed like a regular property (without parentheses). This is useful for encapsulating logic to compute or retrieve a value dynamically.
+### A getter is a method that retrieves and returns the value of a property but is accessed like a regular property (without parentheses). This is useful for encapsulating logic to compute or retrieve a value dynamically.
 
 ------------------------------------------------------------
 # Angular SSR (Server-Side Rendering) with Angular Universal
