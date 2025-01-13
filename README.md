@@ -148,3 +148,72 @@ RxJS (Reactive Extensions for JavaScript) is a library for reactive programming 
 
 ### Resources 
 (https://www.tektutorialshub.com/angular-tutorial/#google_vignette)
+
+
+
+### Addtional Notes
+--------------------
+
+
+##  A getter is a method that retrieves and returns the value of a property but is accessed like a regular property (without parentheses). This is useful for encapsulating logic to compute or retrieve a value dynamically.
+
+------------------------------------------------------------
+# Angular SSR (Server-Side Rendering) with Angular Universal
+
+## How SSR Works in Angular (with Angular Universal)
+
+Angular Universal is used to enable SSR in Angular apps.
+
+- The server (Node.js) generates the static HTML on the server, sends it to the browser, and then bootstraps the Angular app on the client-side.
+- When a user requests a page, the server responds with a fully-rendered HTML page.
+- The Angular app is then bootstrapped on the client-side to make it dynamic and interactive, a process known as **hydration**.
+
+## When Should You Enable SSR?
+
+You should consider enabling SSR if:
+
+- Your application is **SEO-sensitive**, like a public blog, e-commerce site, or news site.
+- Your app needs to **load quickly** for better user experience.
+- You want to enhance **performance** on slow devices or networks.
+
+## Things to Consider with SSR in Angular
+
+- **Complexity**: SSR adds complexity to your app. You will need to manage both client-side and server-side rendering logic.
+- **Server Hosting**: Since the app needs to run on the server as well, you'll need to host your application on a server that supports Node.js (e.g., AWS, Azure, or Heroku).
+- **API Calls**: You need to ensure that your API calls work well in an SSR environment, as they may behave differently when running on the server compared to the client.
+
+
+# Standalone Components in Angular
+
+## Overview
+Standalone components in Angular allow you to build self-contained components without the need for declaring them inside an `NgModule`. This feature was introduced in **Angular 14** to simplify the Angular module system, making development more modular and maintainable.
+
+---
+
+## Key Features
+1. **No Module Dependency**:
+   Standalone components eliminate the need for `NgModule`. Instead, they use the `standalone: true` property in the component metadata.
+
+2. **Direct Usage**:
+   Standalone components can be bootstrapped or used directly without wrapping them in an `AppModule`.
+
+3. **Simplified Structure**:
+   They reduce the need for separate module files, making the application structure easier to understand.
+
+4. **Direct Dependency Imports**:
+   Required dependencies are imported directly into the component instead of a module.
+
+---
+
+## Example Usage
+
+### Creating a Standalone Component
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-hello',
+  template: `<h1>Hello, Standalone Component!</h1>`,
+  standalone: true, // Marks this component as standalone
+})
+export class HelloComponent {}
