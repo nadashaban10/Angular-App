@@ -1,5 +1,8 @@
 # Book Library App - [visit the app](https://angular-app-orpin.vercel.app/)
 
+### Resources 
+(https://www.tektutorialshub.com/angular-tutorial/#google_vignette)
+
 ## Project Description
 
 This is a simple Angular application that allows users to manage a list of books. The app fetches books from an API and provides the ability to add, delete, and search books.
@@ -144,10 +147,6 @@ RxJS (Reactive Extensions for JavaScript) is a library for reactive programming 
 2. **Observer:** A consumer of the data emitted by an Observable.
 3. **Operators:** Functions used to transform, filter, or combine data streams (e.g., `map`, `filter`, `merge`).
 4. **Subscription:** A mechanism to start listening to an Observable.
-
-
-### Resources 
-(https://www.tektutorialshub.com/angular-tutorial/#google_vignette)
 
 
 
